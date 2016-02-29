@@ -12,8 +12,11 @@ Update the DB : php app/console doctrine:schema:update --force
 If you want some fixtures write the command : php app/console doctrine:fixtures:load
 
 Run the server :  php app/console server:run
+
 Website multilanguage by Url:
+
 fr: /
+
 en: /en/
 
 
