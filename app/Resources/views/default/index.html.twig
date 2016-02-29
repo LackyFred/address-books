@@ -1,0 +1,121 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ 'home.title'|trans({},'AppBundle') }}{% endblock %}
+{% block body %}
+    <div class="container" id="tourpackages-carousel">
+        <div class="row">
+            {% set all = 0 %}
+            <div class="col-lg-12"><h1>{{ 'contact.contacts'|trans({},'AppBundle') }}</h1></div>
+            {% for contact in contacts %}
+                {% if contact.confirmed == 1 %}
+                    {% set all = all+1 %}
+                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                    <div class="thumbnail">
+                        <div class="caption">
+                            <div class='col-lg-12 well well-add-card'>
+                                <h4 class="center">{{app.user.id ==contact.sender.id? contact.receiver.username : contact.sender.username }}</h4>
+                                <p><span class="glyphicon glyphicon-user" ara-hidden="true"></span><span class="bolding"> {{ 'form.username'|trans({},'FOSUserBundle') }}:</span> {{app.user.id ==contact.sender.id? contact.receiver.username : contact.sender.username }}</p>
+                                <p><span class="glyphicon glyphicon-user" ara-hidden="true"></span><span class="bolding"> {{ 'form.name'|trans({},'AppBundle') }}:</span> {{app.user.id ==contact.sender.id? contact.receiver.name|upper : contact.sender.name|upper }}</p>
+                                <p><span class="glyphicon glyphicon-user" ara-hidden="true"></span><span class="bolding"> {{ 'form.surname'|trans({},'AppBundle') }}:</span> {{app.user.id ==contact.sender.id? contact.receiver.surname|lower|capitalize : contact.sender.surname|lower|capitalize }}</p>
+                                <p><span class="glyphicon glyphicon-envelope" ara-hidden="true"></span><span class="bolding"> {{ 'form.email'|trans({},'FOSUserBundle') }}:</span> {{app.user.id ==contact.sender.id? contact.receiver.email : contact.sender.email }}</p>
+                                <p><span class="glyphicon glyphicon-earphone"></span><span class="bolding"> {{ 'form.phone'|trans({},'AppBundle') }}:</span> {{app.user.id ==contact.sender.id? contact.receiver.phone : contact.sender.phone }}</p>
+                                <p><span class="glyphicon glyphicon-send" ara-hidden="true"></span><span class="bolding"> {{ 'form.address'|trans({},'AppBundle') }}:</span> {{app.user.id ==contact.sender.id? contact.receiver.address : contact.sender.address }}</p>
+                                <p><span class="glyphicon glyphicon-globe" ara-hidden="true"></span><span class="bolding"> {{ 'form.website'|trans({},'AppBundle') }}:</span>
+                                    {% if app.user.id == contact.sender.id %}
+                                    {% if contact.receiver.website is not null %}
+                                        <a href="{{ user.website }}" target="_blank">{{ contact.receiver.website }}</a>
+                                    {% else %}
+                                            {{ 'message.not_website_for_other'|trans({},'AppBundle') }}
+                                    {% endif %}
+                                    {% else %}
+                                        {% if contact.sender.website is not null %}
+                                            <a href="{{ user.website }}" target="_blank">{{ contact.sender.website }}</a>
+                                        {% else %}
+                                            {{ 'message.not_website_for_other'|trans({},'AppBundle') }}
+                                        {% endif %}
+                                    {% endif %}
+                                </p>
+                            </div>
+                            <div class="center">
+                                <a class="btn btn-danger btn-xs btn-update btn-add-card" href="{% if app.user.id == contact.sender.id %}{{ path('delete_contact',{id:contact.receiver.id})}}{% else %}{{ path('delete_contact',{id:contact.sender.id})}}{% endif %}"><span class="glyphicon glyphicon-trash"></span> {{ 'contact.delete'|trans({},'AppBundle') }}</a>
+                                <a class="btn btn-primary btn-xs btn-update btn-add-card" href="{% if app.user.id == contact.sender.id %}{{ path('user_show',{id:contact.receiver.id}) }}{% else %}{{ path('user_show',{id:contact.sender.id})}}{% endif %}">{{ 'home.consult'|trans({},'AppBundle') }}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            {% endfor %}
+            {% if all == 0 %}
+                <div class="caption">
+                    <div class='col-lg-12 well well-add-card'>
+                        <h4 class="center">{{ 'contact.no_contact'|trans({},'AppBundle') }}</h4>
+                    </div>
+                </div>
+            {% endif %}
+        </div><!-- End row -->
+        <div class="row">
+            {% set receiveAll = 0 %}
+            <div class="col-lg-12"><h1>{{ 'contact.receive_demand'|trans({},'AppBundle') }}</h1></div>
+
+            {% for contact in user.receivers %}
+                {% if contact.confirmed == 0 %}
+                    {% set receiveAll = receiveAll+1 %}
+                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                    <div class="thumbnail">
+                        <div class="caption">
+                            <div class='col-lg-12 well well-add-card'>
+                                <h4 class="center">{{  contact.sender.username }}</h4>
+                            </div>
+                            <div class="center">
+                                <a class="btn btn-primary btn-xs btn-update btn-add-card" href="{{ path('accept_contact',{id:contact.sender.id}) }}"><span class="glyphicon glyphicon-plus"></span> {{ 'contact.accept'|trans({},'AppBundle') }}</a>
+                                <a class="btn btn-danger btn-xs btn-update btn-add-card" href="{{ path('delete_contact',{id:contact.sender.id}) }}"><span class="glyphicon glyphicon-trash"></span> {{ 'contact.refuse'|trans({},'AppBundle') }}</a>
+                                <a class="btn btn-primary btn-xs btn-update btn-add-card" href="{{ path('user_show',{id:contact.sender.id}) }}">{{ 'home.consult'|trans({},'AppBundle') }}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+            {% endfor %}
+            {% if receiveAll == 0 %}
+                <div class="caption">
+                    <div class='col-lg-12 well well-add-card'>
+                        <h4 class="center">{{ 'contact.no_contact'|trans({},'AppBundle') }}</h4>
+                    </div>
+                </div>
+            {% endif %}
+        </div><!-- End row -->
+        <div class="row">
+            {% set sendAll = 0 %}
+            <div class="col-lg-12"><h1>{{ 'contact.sending_demand'|trans({},'AppBundle') }}</h1></div>
+
+            {% for contact in user.senders %}
+                {% if contact.confirmed == 0 %}
+                    {% set sendAll = sendAll+1 %}
+                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                        <div class="thumbnail">
+                            <div class="caption">
+                                <div class='col-lg-12 well well-add-card'>
+                                    <h4 class="center">{{  contact.receiver.username }}</h4>
+                                </div>
+                                <div class="center">
+                                    <a class="btn btn-danger btn-xs btn-update btn-add-card" href="{{ path('delete_contact',{id:contact.receiver.id}) }}"><span class="glyphicon glyphicon-trash"></span> {{ 'contact.annule'|trans({},'AppBundle') }}</a>
+                                    <a class="btn btn-primary btn-xs btn-update btn-add-card" href="{{ path('user_show',{id:contact.receiver.id}) }}">{{ 'home.consult'|trans({},'AppBundle') }}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+
+            {% endfor %}
+            {% if sendAll == 0 %}
+                <div class="caption">
+                    <div class='col-lg-12 well well-add-card'>
+                        <h4 class="center">{{ 'contact.no_contact'|trans({},'AppBundle') }}</h4>
+                    </div>
+                </div>
+
+
+            {% endif %}
+        </div><!-- End row -->
+    </div><!-- End container -->
+{% endblock %}

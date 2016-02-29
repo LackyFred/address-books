@@ -1,0 +1,48 @@
+{% trans_default_domain 'FOSUserBundle' %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-offset-3 col-md-6" style="padding: 10px;">
+            <div class="panel panel-default">
+                <div class="panel-heading"><h5>Informations</h5></div>
+                <div class="panel-body">
+                    <p><span class="glyphicon glyphicon-user" ara-hidden="true"></span><span class="bolding"> {{ 'form.username'|trans }}:</span> {{ user.username }}</p>
+                    <p><span class="glyphicon glyphicon-user" ara-hidden="true"></span><span class="bolding"> {{ 'form.name'|trans({},'AppBundle') }}:</span> {{ user.name|upper }}</p>
+                    <p><span class="glyphicon glyphicon-user" ara-hidden="true"></span><span class="bolding"> {{ 'form.surname'|trans({},'AppBundle') }}:</span> {{ user.surname|lower|capitalize }}</p>
+                    {% if  app.user.id == user.id or ( contacts is defined and contacts[user.id] is defined and contacts[user.id]['confirmed'] == 1 )  %}
+                    <p><span class="glyphicon glyphicon-envelope" ara-hidden="true"></span><span class="bolding"> {{ 'form.email'|trans }}:</span> {{ user.email }}</p>
+                    <p><span class="glyphicon glyphicon-earphone"></span><span class="bolding"> {{ 'form.phone'|trans({},'AppBundle') }}:</span> {{ user.phone }}</p>
+                    <p><span class="glyphicon glyphicon-send" ara-hidden="true"></span><span class="bolding"> {{ 'form.address'|trans({},'AppBundle') }}:</span> {{ user.address }}</p>
+                    <p><span class="glyphicon glyphicon-globe" ara-hidden="true"></span><span class="bolding"> {{ 'form.website'|trans({},'AppBundle') }}:</span>
+                        {% if user.website is not null %}
+                        <a href="{{ user.website }}" target="_blank">{{ user.website }}</a>
+                            {% else %}
+                                {% if app.user.id == user.id %}
+                                    {{ 'message.not_website_for_me'|trans({},'AppBundle') }}
+                                {% else %}
+                                    {{ 'message.not_website_for_other'|trans({},'AppBundle') }}
+                                {% endif %}
+                            {% endif %}
+                    </p>
+                    {% endif %}
+                </div>
+                <div class="center">
+                    {% if contacts is defined and contacts[user.id] is defined
+                    and app.user.id == contacts[user.id]['id_sender'] and contacts[user.id]['confirmed'] == 0 %}
+                        <p>{{ 'contact.send_add'|trans({},'AppBundle') }}</p>
+                        <a class="btn btn-danger btn-xs btn-update btn-add-card" href="{{ path('delete_contact',{id:user.id}) }}"><span class="glyphicon glyphicon-trash"></span> {{ 'contact.annule'|trans({},'AppBundle') }}</a>
+                    {% elseif contacts is defined and contacts[user.id] is defined
+                    and app.user.id == contacts[user.id]['id_receiver'] and contacts[user.id]['confirmed'] == 0 %}
+                        <a class="btn btn-primary btn-xs btn-update btn-add-card" href="{{ path('accept_contact',{id:user.id}) }}"><span class="glyphicon glyphicon-plus"></span> {{ 'contact.accept'|trans({},'AppBundle') }}</a>
+                        <a class="btn btn-danger btn-xs btn-update btn-add-card" href="{{ path('delete_contact',{id:user.id}) }}"><span class="glyphicon glyphicon-trash"></span> {{ 'contact.refuse'|trans({},'AppBundle') }}</a>
+                    {% elseif contacts is defined and contacts[user.id] is defined
+                    and contacts[user.id]['confirmed'] == 1 %}
+                        <a class="btn btn-danger btn-xs btn-update btn-add-card" href="{{ path('delete_contact',{id:user.id}) }}"><span class="glyphicon glyphicon-trash"></span> {{ 'contact.delete'|trans({},'AppBundle') }}</a>
+                    {% elseif app.user.id != user.id %}
+                        <a class="btn btn-primary btn-xs btn-update btn-add-card" href="{{ path('add_contact',{id:user.id}) }}"><span class="glyphicon glyphicon-plus"></span> {{ 'contact.add'|trans({},'AppBundle') }}</a>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

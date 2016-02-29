@@ -1,0 +1,37 @@
+form:
+    name: "Nom"
+    surname: "Prénom"
+    phone: "Téléphone"
+    website: "Site Web"
+    address: "Adresse"
+    required: "(Non obligatoire)"
+
+registration:
+    confirmed: "Inscription Réussi !"
+
+home:
+    title: "Accueil"
+    consult: "Consulter le rofil"
+    searchbar: "Recherche"
+    searchbar_result: "Résultats de la recherche :"
+    error_search: "Aucun Résultats"
+
+edit:
+    title: "Mon profil"
+
+contact:
+  add: "Ajouter en contact"
+  annule: "Annuler la demande"
+  delete: "Supprimer de vos contacts"
+  send_add: "Demande d'ajout en cours"
+  accept: "Accepter"
+  refuse: "Refuser"
+  contacts: "Mes Contacts"
+  receive_demand: "Demandes Reçues"
+  sending_demand: "Demandes Envoyés"
+  no_contact: "Il n'y a pas de contact"
+
+message:
+    not_website_for_me: "Vous n'avez pas de site web"
+    not_website_for_other: "Cette utilisateur n'a pas de site web"
+    error_profile: "Ce Profil n'existe pas"

@@ -1,0 +1,47 @@
+{% extends '::base.html.twig' %}
+{% block title %}{{ 'home.searchbar'|trans({},'AppBundle') }}{% endblock title %}
+{% block body %}
+    <div class="container" id="tourpackages-carousel">
+    <h1 class="center">{{ 'home.searchbar_result'|trans({},'AppBundle') }}</h1>
+    {% if users is empty %}
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h3 class="center">{{ 'home.error_search'|trans({},'AppBundle') }}</h3>
+            </div>
+        </div>
+    </div>
+        {% else %}
+            {% for user in users %}
+            <div class="row">
+            <div class="col-md-offset-3 col-md-6">
+                <div class="thumbnail">
+                    <div class="caption">
+                        <div class='col-lg-12 well well-add-card'>
+                            <h4 class="center">{{ user.username }}</h4>
+                        </div>
+                        <div class="center">
+                            {% if contacts is defined and contacts[user.id] is defined
+                            and app.user.id == contacts[user.id]['id_sender'] and contacts[user.id]['confirmed'] == 0 %}
+                                <p>{{ 'contact.send_add'|trans({},'AppBundle') }}</p>
+                                <a class="btn btn-danger btn-xs btn-update btn-add-card" href="{{ path('delete_contact',{id:user.id}) }}"><span class="glyphicon glyphicon-trash"></span> {{ 'contact.annule'|trans({},'AppBundle') }}</a>
+                            {% elseif contacts is defined and contacts[user.id] is defined
+                            and app.user.id == contacts[user.id]['id_receiver'] and contacts[user.id]['confirmed'] == 0 %}
+                                <a class="btn btn-primary btn-xs btn-update btn-add-card" href="{{ path('accept_contact',{id:user.id}) }}"><span class="glyphicon glyphicon-plus"></span> {{ 'contact.accept'|trans({},'AppBundle') }}</a>
+                                <a class="btn btn-danger btn-xs btn-update btn-add-card" href="{{ path('delete_contact',{id:user.id}) }}"><span class="glyphicon glyphicon-trash"></span> {{ 'contact.refuse'|trans({},'AppBundle') }}</a>
+                            {% elseif contacts is defined and contacts[user.id] is defined
+                            and contacts[user.id]['confirmed'] == 1 %}
+                                <a class="btn btn-danger btn-xs btn-update btn-add-card" href="{{ path('delete_contact',{id:user.id}) }}"><span class="glyphicon glyphicon-trash"></span> {{ 'contact.delete'|trans({},'AppBundle') }}</a>
+                            {% elseif app.user.id != user.id %}
+                                 <a class="btn btn-primary btn-xs btn-update btn-add-card" href="{{ path('add_contact',{id:user.id}) }}"><span class="glyphicon glyphicon-plus"></span> {{ 'contact.add'|trans({},'AppBundle') }}</a>
+                            {% endif %}
+
+                        <a class="btn btn-primary btn-xs btn-update btn-add-card" href="{{ path('user_show',{id:user.id}) }}">{{ 'home.consult'|trans({},'AppBundle') }}</a>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+        {% endif %}
+{% endblock body %}

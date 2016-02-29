@@ -1,0 +1,35 @@
+form:
+    name: "Name"
+    surname: "Surname"
+    phone: "Phone Number"
+    website: "WebSite"
+    address: "Address"
+    required: "(Not Required)"
+
+registration:
+    confirmed: "You are registered !"
+
+home:
+    title: "Home"
+    consult: "Consult profile"
+    searchbar: "Search"
+    searchbar_result: "Search results :"
+    error_search: "No Results"
+edit:
+    title: "My profile"
+
+contact:
+  add: "Add in contact"
+  annule: "Stop the adding proceed"
+  delete: "Delete to your contact"
+  send_add: "Add contact in waiting"
+  accept: "Accept"
+  refuse: "Refuse"
+  contacts: "My Contacts"
+  receive_demand: "Receiving in contact"
+  sending_demand: "Contact with proceed in waiting"
+  no_contact: "There is no contacts"
+message:
+    not_website_for_me: "You haven't got a website"
+    not_website_for_other: "This user haven't got a website"
+    error_profile: "This Profil doesn't exist"

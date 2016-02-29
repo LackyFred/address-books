@@ -1,0 +1,88 @@
+{% trans_default_domain 'FOSUserBundle' %}
+<div class="container">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="col-md-12">
+                    <div class="col-md-6" style="padding: 10px;">
+                        <div class="panel panel-default">
+                            <div class="panel-heading"><h5>Informations</h5></div>
+                            <div class="panel-body">
+                                <p><span class="glyphicon glyphicon-user" ara-hidden="true"></span><span class="bolding"> {{ 'form.username'|trans }}:</span> {{ user.username }}</p>
+                                <p><span class="glyphicon glyphicon-user" ara-hidden="true"></span><span class="bolding"> {{ 'form.name'|trans({},'AppBundle') }}:</span> {{ user.name|upper }}</p>
+                                <p><span class="glyphicon glyphicon-user" ara-hidden="true"></span><span class="bolding"> {{ 'form.surname'|trans({},'AppBundle') }}:</span> {{ user.surname|lower|capitalize }}</p>
+                                <p><span class="glyphicon glyphicon-envelope" ara-hidden="true"></span><span class="bolding"> {{ 'form.email'|trans }}:</span> {{ user.email }}</p>
+                                <p><span class="glyphicon glyphicon-earphone"></span><span class="bolding"> {{ 'form.phone'|trans({},'AppBundle') }}:</span> {{ user.phone }}</p>
+                                <p><span class="glyphicon glyphicon-send" ara-hidden="true"></span><span class="bolding"> {{ 'form.address'|trans({},'AppBundle') }}:</span> {{ user.address }}</p>
+                                <p><span class="glyphicon glyphicon-globe" ara-hidden="true"></span><span class="bolding"> {{ 'form.website'|trans({},'AppBundle') }}:</span> {% if user.website is not null %}<a href="{{ user.website }}" target="_blank">{{ user.website }}{% else %}{{ 'message.not_website_for_me'|trans({},'AppBundle') }}{% endif %}</a></p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-6">
+                        {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
+                        {% if not form.vars.valid %}
+                            <div class="alert alert-dismissible alert-danger">
+                                {%if form_errors(form.email) is not empty  %}
+                                    <p>{{ form_errors(form.email) }}</p>
+                                {% endif %}
+                                {%if form_errors(form.username) is not empty  %}
+                                    <p>{{ form_errors(form.username) }}</p>
+                                {% endif %}
+                                {%if form_errors(form.name) is not empty  %}
+                                    <p>{{ form_errors(form.name) }}</p>
+                                {% endif %}
+                                {%if form_errors(form.surname) is not empty  %}
+                                    <p>{{ form_errors(form.surname) }}</p>
+                                {% endif %}
+                                {%if form_errors(form.phone) is not empty  %}
+                                    <p>{{ form_errors(form.phone) }}</p>
+                                {% endif %}
+                                {%if form_errors(form.address) is not empty  %}
+                                    <p>{{ form_errors(form.address) }}</p>
+                                {% endif %}
+                                {%if form_errors(form.website) is not empty  %}
+                                    <p>{{ form_errors(form.website) }}</p>
+                                {% endif %}
+                                {% if form_errors(form.current_password) is not empty  %}
+                                    <p>{{ form_errors(form.current_password) }}</p>
+                                {% endif %}
+
+                            </div>
+                        {% endif %}
+                        <div class="form-group">
+                            {{ form_widget(form.email,{'attr': {'class': 'form-control','placeholder': 'form.email'|trans}}) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_widget(form.username,{'attr': {'class': 'form-control','placeholder':'form.username'|trans}}) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_widget(form.name,{'attr': {'class': 'form-control','placeholder':'form.name'|trans({},'AppBundle')}}) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_widget(form.surname,{'attr': {'class': 'form-control','placeholder':'form.surname'|trans({},'AppBundle')}}) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_widget(form.phone,{'attr': {'class': 'form-control','placeholder':'form.phone'|trans({},'AppBundle')}}) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_widget(form.address,{'attr': {'class': 'form-control','placeholder':'form.address'|trans({},'AppBundle')}}) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_widget(form.website,{'attr': {'class': 'form-control','placeholder':'form.website'|trans({},'AppBundle')~' '~'form.required'|trans({},'AppBundle')}}) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_widget(form.current_password,{'attr': {'class': 'form-control','placeholder':'form.password'|trans}}) }}
+                        </div>
+
+                        <div class="form-group">
+                            <input type="submit" class="form-control btn btn-register" value="{{ 'profile.edit.submit'|trans }}" />
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
