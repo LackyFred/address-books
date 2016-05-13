@@ -33,7 +33,7 @@ class LoadUserData extends AbstractFixture implements FixtureInterface, Containe
             ->setSurname('frédéric')
             ->setName('pernin')
             ->setWebsite('https://fr.linkedin.com/')
-            ->setPassword($this->container->get('security.password_encoder')->encodePassword($user1, 'appartoo'));
+            ->setPassword($this->container->get('security.password_encoder')->encodePassword($user1, 'testapp'));
 
         $manager->persist($user1);
 
@@ -45,7 +45,7 @@ class LoadUserData extends AbstractFixture implements FixtureInterface, Containe
             ->setPhone('0650881234')
             ->setSurname('yvan')
             ->setName('bertimon')
-            ->setPassword($this->container->get('security.password_encoder')->encodePassword($user2, 'appartoo'));
+            ->setPassword($this->container->get('security.password_encoder')->encodePassword($user2, 'testapp'));
 
         $manager->persist($user2);
 
@@ -57,7 +57,7 @@ class LoadUserData extends AbstractFixture implements FixtureInterface, Containe
             ->setPhone('0650111534')
             ->setSurname('Joelle')
             ->setName('Bernardo')
-            ->setPassword($this->container->get('security.password_encoder')->encodePassword($user3, 'appartoo'));
+            ->setPassword($this->container->get('security.password_encoder')->encodePassword($user3, 'testapp'));
 
         $manager->persist($user3);
 
@@ -70,7 +70,7 @@ class LoadUserData extends AbstractFixture implements FixtureInterface, Containe
             ->setSurname('freddy')
             ->setName('errasmuti')
             ->setWebsite('https://www.twitter.com/')
-            ->setPassword($this->container->get('security.password_encoder')->encodePassword($user4, 'appartoo'));
+            ->setPassword($this->container->get('security.password_encoder')->encodePassword($user4, 'testapp'));
 
         $manager->persist($user4);
 
@@ -82,7 +82,7 @@ class LoadUserData extends AbstractFixture implements FixtureInterface, Containe
             ->setPhone('0755181034')
             ->setSurname('bob')
             ->setName('dalin')
-            ->setPassword($this->container->get('security.password_encoder')->encodePassword($user5, 'appartoo'));
+            ->setPassword($this->container->get('security.password_encoder')->encodePassword($user5, 'testapp'));
 
         $manager->persist($user5);
 
@@ -95,7 +95,7 @@ class LoadUserData extends AbstractFixture implements FixtureInterface, Containe
             ->setSurname('loic')
             ->setName('latonade')
             ->setWebsite('https://www.facebook.com/')
-            ->setPassword($this->container->get('security.password_encoder')->encodePassword($user6, 'appartoo'));
+            ->setPassword($this->container->get('security.password_encoder')->encodePassword($user6, 'testapp'));
 
         $manager->persist($user6);
 
@@ -107,7 +107,7 @@ class LoadUserData extends AbstractFixture implements FixtureInterface, Containe
             ->setPhone('0650822224')
             ->setSurname('laetitia')
             ->setName('perrez')
-            ->setPassword($this->container->get('security.password_encoder')->encodePassword($user7, 'appartoo'));
+            ->setPassword($this->container->get('security.password_encoder')->encodePassword($user7, 'testapp'));
 
         $manager->persist($user7);
 
