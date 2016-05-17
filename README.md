@@ -13,6 +13,8 @@ If you want some fixtures write the command : php app/console doctrine:fixtures:
 
 Run the server :  php app/console server:run
 
+The account to be connect are in src/AppBundle/DataFixtures, there are all acounts with 'testapp' like password
+
 Website multilanguage by Url:
 
 fr: /
